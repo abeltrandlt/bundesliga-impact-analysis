@@ -1,6 +1,3 @@
-# bundesliga-impact-analysis
-Analysis of Bundesliga players’ impact using advanced stats (2024/25 season with 2023/24 comparison). Includes data scraping, cleaning, impact scoring, and visualizations.
-
 # ⚽ Bundesliga Player Impact Analysis (2024/25 + 2023/24 Benchmark)
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
@@ -93,9 +90,4 @@ pip install -r requirements.txt
 * Predict player transfer values from impact scores.
 * Add real-time dashboard updates.
 
-```
-
----
-
-👉 Next decision: do you want me to generate the **environment.yml** for `data_env` (so you can commit it alongside `requirements.txt`), or keep it lean with just the pip freeze file?
 ```
