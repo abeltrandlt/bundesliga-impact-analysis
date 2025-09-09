@@ -1,0 +1,26 @@
+seasons:
+  live: "2025-2026"
+  benchmark: "2024-2025"
+
+sources:
+  fbref:
+    standard:
+      url: "https://fbref.com/en/comps/20/stats/Bundesliga-Stats"
+      table_id: "stats_standard"
+    shooting:
+      url: "https://fbref.com/en/comps/20/shooting/Bundesliga-Stats"
+      table_id: "stats_shooting"
+    passing:
+      url: "https://fbref.com/en/comps/20/passing/Bundesliga-Stats"
+      table_id: "stats_passing"
+    possession:
+      url: "https://fbref.com/en/comps/20/possession/Bundesliga-Stats"
+      table_id: "stats_possession"
+    defending:
+      url: "https://fbref.com/en/comps/20/defense/Bundesliga-Stats"
+      table_id: "stats_defense"
+
+output:
+  raw_dir: "data/raw"
+  user_agent: "Mozilla/5.0 (compatible; BundesligaImpactBot/0.1; +https://github.com/abeltrandlt)"
+  request_pause_seconds: 2
