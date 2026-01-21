@@ -1,11 +1,11 @@
-# ⚽ Bundesliga Player Impact Analysis (2024/25 + 2023/24 Benchmark)
+# ⚽ Bundesliga Player Impact Analysis (2025/26 + 2024/25 Benchmark)
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## 📌 Overview
 This project analyzes **Bundesliga player impact** using advanced statistics.  
-The 2024/25 season (in progress) is the primary focus, with the 2023/24 season included as a **benchmark** for comparison.  
+The 2025/26 season (in progress) is the primary focus, with the 2024/25 season included as a **benchmark** for comparison.  
 
 The key deliverable is a **Player Impact Index (PIS)** that blends offensive, defensive, and possession-based contributions to highlight the most influential players.  
 
