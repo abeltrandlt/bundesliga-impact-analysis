@@ -1,6 +1,8 @@
+#Feel free to change the season as needed
+
 import pandas as pd
 
-def load_standard(season="2025-2026"):
+def load_standard(season="2024-2025"):
     df = pd.read_csv(f"data/raw/fbref_standard_{season}.csv")
 
     df = df.rename(columns={
@@ -24,7 +26,7 @@ load_standard()
 
 
 #Passing Enrichment
-def enrich_passing(base: pd.DataFrame, season: str = "2025-2026") -> pd.DataFrame:
+def enrich_passing(base: pd.DataFrame, season: str = "2024-2025") -> pd.DataFrame:
     df = pd.read_csv(f"data/raw/fbref_passing_{season}.csv")
 
     # Canonical names (match your Standard base)
@@ -62,7 +64,7 @@ def enrich_passing(base: pd.DataFrame, season: str = "2025-2026") -> pd.DataFram
 
 
 #Shooting Enrichment
-def enrich_shooting(base: pd.DataFrame, season: str = "2025-2026") -> pd.DataFrame:
+def enrich_shooting(base: pd.DataFrame, season: str = "2024-2025") -> pd.DataFrame:
     df = pd.read_csv(f"data/raw/fbref_shooting_{season}.csv")
 
     # Canonical names
@@ -100,7 +102,7 @@ def enrich_shooting(base: pd.DataFrame, season: str = "2025-2026") -> pd.DataFra
 
 
 #Defending Enrichment
-def enrich_defending(base: pd.DataFrame, season: str = "2025-2026") -> pd.DataFrame:
+def enrich_defending(base: pd.DataFrame, season: str = "2024-2025") -> pd.DataFrame:
     df = pd.read_csv(f"data/raw/fbref_defending_{season}.csv")
 
     # Canonical names based on YOUR columns
@@ -141,7 +143,7 @@ def enrich_defending(base: pd.DataFrame, season: str = "2025-2026") -> pd.DataFr
 
 
 #Possesion Enrichment
-def enrich_possession(base: pd.DataFrame, season: str = "2025-2026") -> pd.DataFrame:
+def enrich_possession(base: pd.DataFrame, season: str = "2024-2025") -> pd.DataFrame:
     df = pd.read_csv(f"data/raw/fbref_possession_{season}.csv")
 
     df = df.rename(columns={
@@ -171,7 +173,7 @@ def enrich_possession(base: pd.DataFrame, season: str = "2025-2026") -> pd.DataF
 
 
 #Runner
-def build_player_season_dataset(season: str = "2025-2026") -> pd.DataFrame:
+def build_player_season_dataset(season: str = "2024-2025") -> pd.DataFrame:
     base = load_standard(season)
     base = enrich_passing(base, season)
     base = enrich_shooting(base, season)
@@ -181,7 +183,7 @@ def build_player_season_dataset(season: str = "2025-2026") -> pd.DataFrame:
 
 
 
-def save_processed(season: str = "2025-2026"):
+def save_processed(season: str = "2024-2025"):
     df = build_player_season_dataset(season)
     out_path = f"data/processed/players_base_{season}.csv"
     df.to_csv(out_path, index=False)

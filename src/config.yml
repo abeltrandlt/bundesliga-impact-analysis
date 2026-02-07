@@ -22,5 +22,17 @@ sources:
 
 output:
   raw_dir: "data/raw"
-  user_agent: "Mozilla/5.0 (compatible; BundesligaImpactBot/0.1; +https://github.com/abeltrandlt)"
-  request_pause_seconds: 2
+  request_pause_seconds: 7
+  html_cache_dir: "data/html_cache"
+  use_html_cache: true
+
+
+#output:
+ # raw_dir: "data/raw"
+ # user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+ # request_pause_seconds: 7
+ # retries_on_403: 0
+ # sleep_on_403_seconds: 60
+ # retries_total: 4
+ # retry_backoff_factor: 2.0
+
