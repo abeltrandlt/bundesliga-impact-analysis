@@ -1,155 +1,118 @@
 # Bundesliga Player Impact & Market Inefficiency Analysis
-### Overview
 
-This project analyzes player performance in the Bundesliga through a role-relative impact model, with the goal of identifying contributors whose on-field influence exceeds their market valuation. A Moneyball-style approach to player evaluation.
+**TL;DR:** A **Moneyball-inspired** analysis that builds a **role-relative impact model** for the **2024/25 Bundesliga** and compares impact to market value to identify **undervalued contributors**. Live-season (2025/26) notes are used for **qualitative validation** under public data constraints.
 
-Rather than ranking players by traditional headline statistics (goals, assists), the analysis evaluates multi-phase contribution across shooting, passing, possession, and defending, while respecting the structural differences between positions.
+**Tech:** Python (pandas, numpy), Jupyter, matplotlib/seaborn, FBref tables, Transfermarkt valuations (Kaggle)
 
-The project is anchored on the 2024/25 Bundesliga season, with limited qualitative validation using early 2025/26 live-season data.
+---
 
-### Motivation
+## Overview
 
-Impact in football cannot exist without opportunity, context, and role awareness.
+This project evaluates player performance through a **role-relative impact model** with the goal of identifying contributors whose on-field influence exceeds their market valuation.
 
-Comparing a striker to a defensive midfielder by goal contributions alone ignores the underlying actions that enable success: ball recovery, progression, pressure, and positional discipline. As a result, certain player profiles, particularly defensive and transitional contributors, are often undervalued by the market.
+Rather than ranking players via headline statistics (goals, assists), the analysis measures **multi-phase contribution** across **shooting, passing, possession, and defending**, while respecting structural differences between positions.
+
+The project is anchored on the **2024/25 Bundesliga season**, with limited qualitative validation using early **2025/26** observations.
+
+---
+
+<img width="846" height="550" alt="image" src="https://github.com/user-attachments/assets/b4829d15-d188-46f6-b9c6-04d8ad10034d" />
+
+---
+
+## Motivation
+
+Impact in football cannot exist without **opportunity, context, and role awareness**.
+
+Comparing a striker to a defensive midfielder by goals alone ignores actions that enable team success: ball recovery, progression, pressure, and positional discipline. These contributions are often underrepresented in market narratives, creating potential **market inefficiencies**.
 
 This project aims to:
+- Measure impact **relative to role**, not reputation
+- Identify **market inefficiencies** using public data
+- Show how **historical impact** can inform prospective monitoring
 
-- Measure impact relative to role, not reputation
+---
 
-- Identify market inefficiencies using public data
+## Data Sources
 
-- Demonstrate how historical impact can inform prospective evaluation
+- **FBref (public tables)**
+  - Standard, Shooting, Passing, Possession, Defending
+  - **2024/25** (complete)
+  - **2025/26** (partial; used for observational validation)
 
-### Data Sources
+- **Transfermarkt (via Kaggle)**
+  - Player market valuations (snapshot: **April 2025**)
+  - Used for **2024/25** value efficiency analysis
 
-- FBref (StatsBomb / Opta-derived public tables)
+> **Note:** Public data availability changed during development, limiting advanced live-season metrics. The project explicitly accounts for this and avoids forcing incomplete live data into the core model.
 
-  - Standard, Shooting, Passing, Possession, Defending tables
+---
 
-  - 2024/25 season (complete)
+## Methodology
 
-  - 2025/26 season (partial; observational use only)
+### 1) Data Processing
+- Clean and standardize raw FBref tables
+- Compute per-90 metrics
+- Filter low-minute players to reduce noise
+- Normalize positional labels into roles: **DF, MF, FW, GK**
 
-- Transfermarkt (via Kaggle dataset)
+### 2) Role-Relative Normalization
+- Convert key metrics to **within-role percentiles**
+- Prevent cross-role distortion (e.g., defenders vs forwards)
 
-  - Player market valuations (April 2025 snapshot)
+### 3) Impact Model
+Two scores are computed:
+- **Impact (Raw):** aggregated role-relative contribution
+- **Impact (Adjusted):** reliability-weighted version accounting for minutes played
 
-  - Used exclusively for 2024/25 value efficiency analysis
+Weights are role-aware:
+- defense emphasis for **DF**
+- progression/creation for **MF**
+- threat generation for **FW**
 
-Note: Due to changes in public data availability, some advanced metrics are no longer consistently accessible for the live 2025/26 season. The project explicitly accounts for this limitation.
+### 4) Market Value Efficiency (2024/25)
+- Compare impact vs market value
+- **Value efficiency** highlights players delivering high impact per unit cost
+- Analysis is retrospective to avoid valuation timing mismatch
 
-### Methodology
-1. Data Processing
-
-- Raw FBref tables are cleaned and standardized
-
-- Per-90 metrics are computed
-
-- Players with insufficient minutes are filtered to reduce noise
-
-- Positional labels are normalized into four roles: DF, MF, FW, GK
-
-2. Role-Relative Normalization
-
-- Metrics are converted into within-role percentiles
-
-- This prevents cross-role distortion (e.g., defenders vs forwards)
-
-3. Impact Model
-
-Two impact scores are computed:
-
-- Impact (Raw): Aggregated role-relative contribution
-
-- Impact (Adjusted): Reliability-weighted version accounting for minutes played
-
-Metric weights are role-aware and emphasize:
-
-- Defensive actions for defenders
-
-- Progression and creation for midfielders
-
-- Threat generation for attackers
-
-4. Market Value Efficiency (2024/25)
-
-- Impact scores are compared against market valuation
-
-- Value efficiency highlights players delivering high impact per unit of cost
-
-- Analysis is strictly retrospective to avoid misaligned valuation timing
-
-5. Live-Season Validation (2025/26)
-
-- A small subset of shortlisted players is manually tracked
-
+### 5) Live-Season Validation (2025/26)
+- Manually track a small subset of shortlisted players
 - Used for qualitative confirmation, not model recalibration
 
-- Observes persistence of impact signals under real-world constraints
+---
 
-### Key Findings
+## Key Outputs
 
-- Impact is highly role-dependent and should not be compared across positions
+- **Role-relative impact tables** for 2024/25 (DF/MF/FW)
+- **Value-efficiency shortlist** by role (impact vs market valuation)
+- **Phase 11 notebook**: narrative visuals + findings + live validation notes
 
-- Several players delivered elite impact at below-market valuations
+---
 
-- Defensive and transitional contributors are frequently undervalued
+## Limitations
 
-- Historical undervaluation provides a stable lens for prospective monitoring
+- Public data availability changed mid-project, restricting advanced live-season stats
+- Market values are snapshots (not real-time pricing)
+- Live-season validation is observational rather than model-driven
 
-- Live-season observations largely align with prior impact signals
+---
 
-### Limitations
+## Repository Structure
 
-- Public data availability changed mid-project, restricting advanced live-season metrics
-
-- Market values represent snapshots, not real-time pricing
-
-- Live-season analysis is observational rather than model-driven
-
-These limitations are addressed transparently and do not affect the validity of the core impact model.
-
-### Repository Structure
+```text
 bundesliga-impact-analysis/
-│
 ├── data/
-│   ├── raw/            # Raw FBref CSVs
-│   ├── processed/      # Cleaned & modeled datasets
-│   └── external/       # Transfermarkt (Kaggle) data
-│
+│   ├── raw/            # Raw FBref CSVs (not committed)
+│   ├── processed/      # Modeled outputs (not committed)
+│   └── external/       # Transfermarkt (Kaggle) data (not committed)
 ├── notebooks/
 │   └── 11_phase11_impact_storytelling.ipynb
-│   └── analysis_notebook.ipynb
-│
 ├── src/
-│   ├── cleaning.py
-│   ├── normalization_phase6.py
-│   ├── impact_phase7.py
-│   ├── impact_phase8.py
 │   ├── scraping.py
 │   ├── processing_phase4.py
-│   ├── utils.py
+│   ├── cleaning.py
+│   ├── normalization_phase6.py
+│   ├── impact_phase8.py
 │   └── phase10_moneyball.py
-│
 ├── README.md
 └── requirements.txt
-
-### Reproducibility
-
-The project is designed to be reproducible end-to-end:
-
-1. Create a Python environment using requirements.txt
-
-2. Place raw CSVs into data/raw/
-
-3. Run cleaning, normalization, and impact scripts
-
-4. Execute the Phase 11 notebook for analysis and visualization
-
-Scraping is supported but may be rate-limited by source providers.
-
-### Closing Note
-
-This project prioritizes methodological rigor over convenience.
-Rather than forcing incomplete data into the model, it demonstrates how structured reasoning, role awareness, and historical validation can surface meaningful insights — even under real-world constraints.
